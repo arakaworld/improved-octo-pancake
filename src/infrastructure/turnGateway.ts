@@ -2,6 +2,13 @@ import { TurnRecord } from "./turnRecord"
 import mysql from "mysql2/promise"
 
 export class TurnGateway {
+  /**
+   *
+   * @param conn
+   * @param gameId
+   * @param turnCount
+   * @returns
+   */
   async findForGameIdAndTurnCount(
     conn: mysql.Connection,
     gameId: number,
@@ -27,6 +34,15 @@ export class TurnGateway {
     )
   }
 
+  /**
+   *
+   * @param conn
+   * @param gameId
+   * @param turnCount
+   * @param nextDisc
+   * @param endAt
+   * @returns
+   */
   async insert(
     conn: mysql.Connection,
     gameId: number,
