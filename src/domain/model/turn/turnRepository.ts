@@ -2,15 +2,16 @@
  * MEMO: ドメインモデルの単位で読み書きできることがRepositoryの責務
  */
 
-import { TurnGateway } from "../../infrastructure/turnGateway"
-import { MoveGateway } from "../../infrastructure/moveGateway"
-import { SquareGateway } from "../../infrastructure/squareGateway"
+import { TurnGateway } from "../../../infrastructure/turnGateway"
+import { MoveGateway } from "../../../infrastructure/moveGateway"
+import { SquareGateway } from "../../../infrastructure/squareGateway"
 import { Board } from "./board"
 import { toDisc } from "./disc"
 import { Move } from "./move"
 import { Point } from "./point"
 import { Turn } from "./turn"
 import mysql from "mysql2/promise"
+import { DomainError } from "../error/domainError"
 
 const turnGateway = new TurnGateway()
 const moveGateway = new MoveGateway()
@@ -35,7 +36,7 @@ export class TurnRepository {
       turnCount
     )
     if (!turnRecord) {
-      throw new Error("Specified turn not found")
+      throw new DomainError("SpecifiedTurnNotFound", "Specified turn not found")
     }
 
     const squareRecords = await squareGateway.findForTurnId(conn, turnRecord.id)
@@ -54,10 +55,13 @@ export class TurnRepository {
       )
     }
 
+    const nextDisc =
+      turnRecord.nextDisc === null ? undefined : toDisc(turnRecord.nextDisc)
+
     return new Turn(
       gameId,
       turnCount,
-      toDisc(turnRecord.nextDisc),
+      nextDisc,
       move,
       new Board(board),
       turnRecord.endAt
