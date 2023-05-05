@@ -4,7 +4,7 @@ import { GameRepository } from "../../domain/model/game/gameRepository"
 import { TurnRepository } from "../../domain/model/turn/turnRepository"
 import { connectMySQL } from "../../infrastructure/connection"
 
-export class GameService {
+export class StartNewGameUseCase {
   /**
    * 利用元で実装クラスを指定する（DI）
    * @param _gameRepository
@@ -18,7 +18,7 @@ export class GameService {
   /**
    *
    */
-  async startNewGame() {
+  async run() {
     const now = new Date()
 
     const conn = await connectMySQL()
