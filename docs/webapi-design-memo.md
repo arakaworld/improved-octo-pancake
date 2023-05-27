@@ -6,7 +6,7 @@
 
 POST /api/games
 
-## 現在の盤面を表示する
+## 現在の盤面を表示する・勝敗を確認する
 
 指定したターン数の「ターン」を取得する
 
@@ -16,19 +16,19 @@ GET /api/games/latest/turns/{turnCount}
 
 ```json
 {
-    "turnCount": 1,
-    "board": [
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 2, 0, 0, 0],
-        [0, 0, 0, 2, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
-    ],
-    "nextDisc": 1,
-    "winnerDisc": 1
+  "turnCount": 1,
+  "board": [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 2, 0, 0, 0],
+    [0, 0, 0, 2, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  "nextDisc": 1,
+  "winnerDisc": 1
 }
 ```
 
@@ -39,17 +39,17 @@ GET /api/games/latest/turns/{turnCount}
 POST /api/games/latest/turns
 
 リクエストボディ
+
 ```json
 {
-    "turnCount": 1,
-    "move": {
-        "disc": 1,
-        "x": 0,
-        "y": 0
-    }
+  "turnCount": 1,
+  "move": {
+    "disc": 1,
+    "x": 0,
+    "y": 0
+  }
 }
 ```
-
 
 ## 自分の対戦結果を表示する
 
@@ -61,17 +61,17 @@ GET /api/games
 
 ```json
 {
-    "games": [
-        {
-            "id": 1,
-            "winnerDisc": 1,
-            "startedAt": "YYYY-MM-DD hh:mm:ss"
-        },
-        {
-            "id": 2,
-            "winnerDisc": 1,
-            "startedAt": "YYYY-MM-DD hh:mm:ss"
-        }
-    ]
+  "games": [
+    {
+      "id": 1,
+      "winnerDisc": 1,
+      "startedAt": "YYYY-MM-DD hh:mm:ss"
+    },
+    {
+      "id": 2,
+      "winnerDisc": 1,
+      "startedAt": "YYYY-MM-DD hh:mm:ss"
+    }
+  ]
 }
 ```
